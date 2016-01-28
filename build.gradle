@@ -1,0 +1,64 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'eclipse'
+
+group = 'tutorial'
+version = '1.0-SNAPSHOT'
+
+description = """TruckEventProcessing"""
+
+sourceCompatibility = 1.5
+targetCompatibility = 1.5
+
+
+
+repositories {
+        
+     maven { url "http://nexus-private.hortonworks.com/nexus/content/groups/public/" }
+     maven { url "http://repo.maven.apache.org/maven2" }
+}
+dependencies {
+    compile(group: 'org.apache.storm', name: 'storm-kafka', version:'0.10.0.2.3.0.0-2557') {
+exclude(module: 'slf4j-log4j12')
+    }
+    compile(group: 'org.apache.storm', name: 'storm-hbase', version:'0.10.0.2.3.0.0-2557') {
+exclude(module: 'slf4j-log4j12')
+    }
+    compile(group: 'org.apache.storm', name: 'storm-hdfs', version:'0.10.0.2.3.0.0-2557') {
+exclude(module: 'slf4j-log4j12')
+    }
+    compile group: 'xerces', name: 'xercesImpl', version:'2.9.1'
+    compile group: 'xalan', name: 'xalan', version:'2.7.1'
+    compile group: 'org.htrace', name: 'htrace-core', version:'3.0.4'
+    compile(group: 'org.apache.hadoop', name: 'hadoop-hdfs', version:'2.7.1.2.3.0.0-2557') {
+exclude(module: 'slf4j-log4j12')
+    }
+    compile(group: 'com.101tec', name: 'zkclient', version:'0.5-1') {
+exclude(module: 'slf4j-log4j12')
+    }
+    compile group: 'org.mortbay.jetty', name: 'jetty', version:'6.1.26'
+    compile(group: 'org.apache.kafka', name: 'kafka_2.10', version:'0.8.2.2.3.0.0-2557') {
+exclude(module: 'slf4j-log4j12')
+    }
+    compile(group: 'org.apache.hadoop', name: 'hadoop-client', version:'2.7.1.2.3.0.0-2557') {
+exclude(module: 'slf4j-log4j12')
+    }
+    compile(group: 'org.apache.hbase', name: 'hbase-client', version:'1.1.1.2.3.0.0-2557') {
+exclude(module: 'log4j-over-slf4j')
+exclude(module: 'slf4j-log4j12')
+    }
+    compile group: 'org.twitter4j', name: 'twitter4j-core', version:'4.0.2'
+    compile(group: 'org.apache.hive', name: 'hive-exec', version:'1.2.1.2.3.0.0-2557') {
+exclude(module: 'log4j-over-slf4j')
+exclude(module: 'slf4j-log4j12')
+    }
+    compile group: 'log4j', name: 'log4j', version:'1.2.17'
+    testCompile group: 'junit', name: 'junit', version:'3.8.1'
+    compile(group: 'org.apache.storm', name: 'storm-core', version:'0.10.0.2.3.0.0-2557') {
+exclude(module: 'log4j-over-slf4j')
+exclude(module: 'slf4j-log4j12')
+       /* This dependency was originally in the Maven provided scope, but the project was not of type war.
+       This behavior is not yet supported by Gradle, so this dependency has been converted to a compile dependency.
+       Please review and delete this closure when resolved. */
+    }
+}
